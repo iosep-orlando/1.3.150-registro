@@ -23,7 +23,8 @@ El enunciado original está en [README-enunciado.md](README-enunciado.md).
 
 ## Demo
 
-Pendiente de publicar (ver [Despliegue](#despliegue)).
+**https://mesa-entradas-registro.onrender.com** (plan gratuito: si estuvo un
+rato sin visitas, tarda unos 50 segundos en despertar).
 
 | Para entrar como | Email |
 |------------------|-------|
@@ -33,7 +34,9 @@ Pendiente de publicar (ver [Despliegue](#despliegue)).
 | Ciudadano nuevo | cualquier otro, por ejemplo `tu-nombre@demo.test` |
 
 La demo no manda mails de verdad: el enlace para entrar, el justificante y
-los avisos aparecen en la **bandeja de demo** (`/bandeja`).
+los avisos aparecen en la **bandeja de demo** (`/bandeja`). Es pública, así
+que cualquiera puede entrar como funcionario: no hay datos reales, y el seed
+la deja como nueva.
 
 ## Stack
 
@@ -192,6 +195,13 @@ configuración está en [`render.yaml`](render.yaml).
 
    Con `MAIL_TRANSPORT=outbox`, los avisos del seed quedan en la bandeja de
    la demo en lugar de buscar un MailHog.
+
+Comprobado en la versión publicada:
+
+- ingreso con `funcionario@demo.test` usando el enlace de la bandeja de demo;
+- la home con el escudo, que se sirve desde el bucket `registro` de Supabase;
+- las cuatro presentaciones de ejemplo en la gestión;
+- el justificante en PDF baja de Supabase por una URL prefirmada.
 
 Lo que implica el plan gratuito:
 
