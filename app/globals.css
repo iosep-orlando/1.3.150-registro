@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* Mesa de Entradas Virtual: papel de oficina pública, tinta negra y UN
+   color, el institucional, que elige el organismo desde la configuración
+   (--inst, con su color de texto --inst-text). Lo escribe <Theme /> en
+   cada visita; estos son los valores por defecto. */
+:root {
+  --inst: #2f5d50;
+  --inst-text: #ffffff;
+}
+
+@theme inline {
+  --font-sans: var(--font-atkinson);
+  --font-serif: var(--font-bitter);
+  --color-inst: var(--inst);
+  --color-inst-text: var(--inst-text);
+  --color-hoja: #f3f4f2;
+  --color-tinta: #14181f;
+  --color-muted: #59606c;
+  --color-line: #d9dde2;
+  --color-ok: #1f7a4d;
+  --color-alerta: #8a5a00;
+  --color-error: #b42318;
+}
+
+.titulo {
+  font-family: var(--font-bitter);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* El sello de cargo de la mesa de entradas: tinta del color institucional,
+   borde doble y un poco torcido, como si lo hubieran golpeado a mano. */
+.sello {
+  color: var(--inst);
+  border: 3px solid var(--inst);
+  outline: 1.5px solid var(--inst);
+  outline-offset: 3px;
+  border-radius: 6px;
+  transform: rotate(-4deg);
+  mix-blend-mode: multiply;
+}
+
+@keyframes golpe {
+  0% {
+    opacity: 0;
+    transform: rotate(-4deg) scale(1.6);
+  }
+  70% {
+    opacity: 1;
+    transform: rotate(-4deg) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-4deg) scale(1);
+  }
+}
+.sello-golpe {
+  opacity: 0;
+  animation: golpe 0.4s cubic-bezier(0.3, 0.7, 0.4, 1) 0.6s forwards;
+}
+
+@layer base {
+  :where(a, button, input, textarea, select, summary):focus-visible {
+    outline: 3px solid var(--inst);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .sello-golpe {
+    opacity: 1;
+    animation: none;
+  }
+}
